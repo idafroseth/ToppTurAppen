@@ -380,7 +380,8 @@ public class DefaultStudentSystem implements StudentSystem {
 		student.setDegrees(degrees);
 		sessionFactory.getCurrentSession().update(student);
 	}
-
+	
+	@Transactional
 	@Override
 	public boolean studentFulfillsDegreeRequirements(int studentId, int degreeId) {
 
@@ -404,6 +405,17 @@ public class DefaultStudentSystem implements StudentSystem {
 		}
 
 	}
+	@Transactional
+	public void setStudentLocation(int studentId, String latitude, String longitude) {
+		try{
+			Student changeStudent = getStudent(studentId);
+			changeStudent.setLongitude(longitude);
+			changeStudent.setLatitude(latitude);
+			sessionFactory.getCurrentSession().update(changeStudent);
+		} catch (RuntimeException re) {
+			logger.error("Attached failed" + re);
+		}
+	}
 
 	private String capitalize(String name) {
 		String[] names = name.split("\\s");
@@ -423,4 +435,7 @@ public class DefaultStudentSystem implements StudentSystem {
 		}
 
 	}
+
+
+	
 }

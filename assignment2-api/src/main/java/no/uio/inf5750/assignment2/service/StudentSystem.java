@@ -219,4 +219,12 @@ public interface StudentSystem
      * @return true/false.
      */
     boolean studentFulfillsDegreeRequirements( int studentId, int degreeId );
+    
+    /**
+     * Set the location of a student by using the browser geolocation functionality
+     * @param studentId
+     * @param latidtude
+     * @param longitude
+     */
+    void setStudentLocation(int studentId, String latitude, String longitude);
 }

@@ -113,7 +113,6 @@ public class HibernateStudentDAO implements StudentDAO {
 			Student changeStudent = getStudent(studentId);
 			changeStudent.setName(name);
 			sessionFactory.getCurrentSession().update(changeStudent);
-			sessionFactory.getCurrentSession().flush();
 		} catch (RuntimeException re) {
 			logger.error("Attached failed" + re);
 

@@ -20,6 +20,7 @@
             <artifactId>assignment2-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        
         <dependency>
             <groupId>no.uio.inf5750</groupId>
             <artifactId>assignment2-deliverable</artifactId>
@@ -27,20 +28,28 @@
         </dependency>
 
 		<!-- May need commenting out, depending on your environment -->
-		<dependency>
+		<!-- 
+		 <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-		
+		-->
 		<!-- May need commenting in/out, depending on your environment -->
-		<!-- 
-		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>jsp-api</artifactId>
-		    <version>2.5</version>
-		</dependency>
-        -->
+		
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>servlet-api</artifactId>
+		<version>3.0-alpha-1</version>
+	</dependency>
+	<dependency>
+		<groupId>com.sun.jersey</groupId>
+		<artifactId>jersey-core</artifactId>
+		<version>1.19</version>
+	</dependency>
+
+
+        
                 
         <dependency>
             <groupId>junit</groupId>
@@ -94,6 +103,12 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+        <!-- of some reason I need this to make my rest @Path varible work -->
+        <dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+		</dependency>
         <dependency>
             <groupId>geronimo-spec</groupId>
             <artifactId>geronimo-spec-jta</artifactId>
@@ -125,10 +140,10 @@
     <build>
         <finalName>assignment2-gui</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-            </plugin>
+   			<plugin>
+  				<groupId>org.eclipse.jetty</groupId>
+  				<artifactId>jetty-maven-plugin</artifactId>
+  			</plugin>
         </plugins>
          
     </build>

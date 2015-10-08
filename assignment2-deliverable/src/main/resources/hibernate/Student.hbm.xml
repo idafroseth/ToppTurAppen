@@ -14,6 +14,14 @@
 		<property name="name" type="string">
 			<column name="student_name" not-null="true" unique="true" />
 		</property>
+		
+		<property name="longitude" type="string">
+		    <column name="student_longitude" not-null="false" unique="false" />
+		</property>
+		
+		<property name="latitude" type="string">
+		    <column name="student_latitude" not-null="false" unique="false" />
+		</property>
 
 		<!-- The name property refers to the get/set-methods, and only many to 
 			many associations require a link table -->

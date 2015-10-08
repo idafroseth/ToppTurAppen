@@ -19,6 +19,12 @@ public class Student
     private Set<Course> courses = new HashSet<Course>();
 
     private Set<Degree> degrees = new HashSet<Degree>();
+    
+    /**
+     * Location variables
+     */
+    private String longitude;
+    private String latitude;
 
     // -------------------------------------------------------------------------
     // Constructors
@@ -112,5 +118,18 @@ public class Student
     public void setDegrees( Set<Degree> degrees )
     {
         this.degrees = degrees;
+    }
+    
+    public void setLongitude(String longitude){
+    	this.longitude = longitude;
+    }
+    public String getLongitude(){
+    	return this.longitude;
+    }
+    public void setLatitude(String latitude){
+    	this.latitude = latitude;
+    }
+    public String getLatitude(){
+    	return this.latitude;
     }
 }

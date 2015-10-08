@@ -173,4 +173,16 @@ public class StudentSystemTest {
 		assertFalse(studentSystem.getStudent(studentId).getCourses().contains(studentSystem.getCourse(courseId)));
 
 	}
+	@Test
+	public void testingLocation(){
+		Student student6 = new Student("Student6");
+		int studentId = studentSystem.addStudent(student6.getName());
+		studentSystem.setStudentLocation(studentId, "1000", "2000");
+		assertNotNull(studentSystem.getStudent(studentId).getLatitude());
+		assertNotNull(studentSystem.getStudent(studentId).getLongitude());
+		assertEquals(studentSystem.getStudent(studentId).getLatitude(), "1000");
+		assertEquals(studentSystem.getStudent(studentId).getLongitude(), "2000");
+		
+	}
+
 }
