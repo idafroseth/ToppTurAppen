@@ -25,27 +25,27 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
-      <version>3.0.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>3.0.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>3.0.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-orm</artifactId>
-      <version>3.0.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>3.0.2.RELEASE</version>
+      <version>${spring.version}</version>
     </dependency>
 	
     <!-- Hibernate -->
@@ -75,11 +75,14 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.5.8</version>
     </dependency>
+    
+    
+    
 	<dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.2.136</version>
-    </dependency>
+		<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		 <version>9.4-1200-jdbc41</version>
+	</dependency>
 	
 	<!-- Junit -->
 	
@@ -88,6 +91,15 @@
       <artifactId>junit</artifactId>
       <version>4.8.1</version>
     </dependency>
+	
+	    
+    <dependency>
+  		<groupId>javassist</groupId>
+  		<artifactId>javassist</artifactId>
+  		<version>3.12.1.GA</version>
+  	</dependency>
+    
   </dependencies>
+
   
 </project>

@@ -1,0 +1,35 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- The table and column name had to be lowercase -->
+<hibernate-mapping package="no.uio.inf5750.assignemnt2.model">
+	<class name="no.uio.inf5750.assignment2.model.Course" table="course">
+		<!-- Primary key column -->
+		<id name="id" column="course_id">
+			<generator class="native">
+				<param name="sequence">course_id_sequence</param>
+			</generator>
+		</id>
+
+		<!-- <property name="id" type="integer"/> -->
+		<property name="courseCode" type="string">
+			<column name="course_code" not-null="true" unique="true" />
+		</property>
+
+		<property name="name" type="string">
+			<column name="course_name" not-null="true" unique="true" />
+		</property>
+
+		<!-- The name property refers to the get/set-methods, and only many to 
+			many associations require a link table -->
+		<set name="attendants" table="students_in_course" lazy="false">
+			<!-- Column name of this side -->
+			<key column="course_id" />
+			<!-- Column name of other side, and ref to the associated class -->
+			<many-to-many column="student_id"
+				class="no.uio.inf5750.assignment2.model.Student" />
+		</set>
+
+	</class>
+</hibernate-mapping>

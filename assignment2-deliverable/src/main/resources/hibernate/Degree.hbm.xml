@@ -1,0 +1,29 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="no.uio.inf5750.assignemnt2.model">
+	<class name="no.uio.inf5750.assignment2.model.Degree" table="degree">
+		<id name="id" column="degree_id">
+			<generator class="sequence">
+				<param name="sequence">degree_id_sequence</param>
+			</generator>
+		</id>
+
+		<!-- <property name="id" type="integer"/> -->
+		<property name="type" type="string">
+			<column name="degree_type" not-null="true" unique="true" />
+		</property>
+
+		<!-- The name property refers to the get/set-methods, and only many to 
+			many associations require a link table -->
+		<set name="requiredCourses" table="courses_in_degree" inverse="false"
+			lazy="false">
+			<!-- Column name of this side -->
+			<key column="degree_id_course" not-null="true" />
+			<!-- Many courses could be part of different degrees -->
+			<many-to-many column="course_id"
+				class="no.uio.inf5750.assignment2.model.Course" />
+		</set>
+	</class>
+</hibernate-mapping>
