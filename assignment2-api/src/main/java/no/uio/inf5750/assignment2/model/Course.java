@@ -20,7 +20,7 @@ public class Course
      * Required and unique.
      */
     private String name;
-
+    
     private Set<Student> attendants = new HashSet<Student>();
 
     // -------------------------------------------------------------------------
