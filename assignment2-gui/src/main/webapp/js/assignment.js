@@ -1,3 +1,26 @@
+let map;
+function initialize_map(){
+	//Define teh map options as a object
+	let mapOptions = {
+			zoom : 10,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    // Try HTML5 geolocation
+    if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                                    position.coords.longitude);
+                    map.setCenter(pos);
+            }, function() {
+                    handleNoGeolocation(true);
+            });
+    } else {
+            // Browser doesn't support Geolocation
+            // Should really tell the user…
+    }
+}
+
 function getStudentData() {
 
 	// This must be implemented by you. The json variable should be fetched
@@ -98,6 +121,12 @@ function populateStudentTable(json) {
 		tableString += '</tr>';
 		$('#studentTable').append(tableString);
 	}
+	var myLatlng = new google.maps.LatLng(student.latitude, student.longitude);                        
+	var marker = new google.maps.Marker({
+	    position: myLatlng,
+	    map: map,
+	    title: student.name
+	});
 
 }
 
@@ -122,7 +151,6 @@ $('#locationbtn').on('click', function(e) {
 
 
 var objectStorage = new Object();
-
 function explodeJSON(object) {
 	if (object instanceof Object == true) {
 		objectStorage[object['@id']] = object;

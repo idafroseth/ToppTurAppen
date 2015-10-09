@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  *         logic is placed into one large class. In most cases, it makes sense
  *         to structure the logic in different classes.
  */
-
+//Because this class is annotatd with Controller this class would automatically be picked
+// up by the component Scanner and made as a bean
+// Could also be annotated @Component, but have been less expressive on what type of bean this is
 @Controller
 public class BaseController {
 
@@ -36,6 +38,8 @@ public class BaseController {
 		model.addAttribute("message", "Leave a message using the form");
 
 		populateModel(model);
+		//The return value is interpreted by the view resolver as the view to be rendered 
+		//DispatcherServlet will ask the view resolver to resolve this logical view name into an actual view.
 		return "index";
 
 	}

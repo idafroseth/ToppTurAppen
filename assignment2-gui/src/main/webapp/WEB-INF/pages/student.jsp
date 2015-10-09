@@ -52,7 +52,8 @@
 			<!--/.nav-collapse -->
 		</div>
 	</div>
-
+	
+<!--  <div id="map-canvas" class="container map"></div>-->	
 
 	<div class="container">
 

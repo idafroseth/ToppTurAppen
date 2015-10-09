@@ -15,7 +15,7 @@ import no.uio.inf5750.assignment2.model.Degree;
 import no.uio.inf5750.assignment2.model.Student;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = no.uio.inf5750.assignment2.configuration.StudentSystemConfiguration.class)
+@ContextConfiguration(classes = no.uio.inf5750.assignment2.configuration.RootConfig.class)
 public class DegreeDAOTest {
 
 	@Autowired

@@ -28,26 +28,35 @@
         </dependency>
 
 		<!-- May need commenting out, depending on your environment -->
-		<!-- 
+		
 		 <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-		-->
-		<!-- May need commenting in/out, depending on your environment -->
+    
+     <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>2.0</version>
+        <scope>provided</scope>
+    </dependency>
 		
+		<!-- May need commenting in/out, depending on your environment -->
+	
 	<dependency>
 		<groupId>javax.servlet</groupId>
 		<artifactId>servlet-api</artifactId>
 		<version>3.0-alpha-1</version>
 	</dependency>
+	
+	<!--  If I would like to do the ApiConfig with REST
 	<dependency>
 		<groupId>com.sun.jersey</groupId>
 		<artifactId>jersey-core</artifactId>
 		<version>1.19</version>
 	</dependency>
-
+	-->
 
         
                 

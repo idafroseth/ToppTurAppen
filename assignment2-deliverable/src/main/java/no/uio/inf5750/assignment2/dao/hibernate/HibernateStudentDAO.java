@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+
 import no.uio.inf5750.assignment2.dao.StudentDAO;
 import no.uio.inf5750.assignment2.model.Course;
 import no.uio.inf5750.assignment2.model.Degree;

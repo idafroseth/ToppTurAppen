@@ -35,7 +35,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@ContextConfiguration(classes = no.uio.inf5750.assignment2.configuration.StudentSystemConfiguration.class)
+@ContextConfiguration(classes = no.uio.inf5750.assignment2.configuration.RootConfig.class)
 @Component("studentSystem")
 public class DefaultStudentSystem implements StudentSystem {
 
