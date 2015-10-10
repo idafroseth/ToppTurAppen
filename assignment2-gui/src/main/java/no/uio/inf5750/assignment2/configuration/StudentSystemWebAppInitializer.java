@@ -11,7 +11,7 @@ AbstractAnnotationConfigDispatcherServletInitializer{
 		return new String[] { "/" };
 	}
 
-	
+	//The listener
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
@@ -19,6 +19,10 @@ AbstractAnnotationConfigDispatcherServletInitializer{
 
 		}
 
+
+//	Configure the DispatcherServlet
+//	which is asked to load the application context using the defined bean  
+//	 DispatcherServlet is expected to load beans containing web components such as controllers, view resolvers, and handler mappings,
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		// TODO Auto-generated method stub

@@ -2,13 +2,14 @@ package no.uio.inf5750.assignment2.model;
 
 import java.util.HashSet;
 import java.util.Set;
+//import com.fasterxml.jackson.annotation.*;
 
 /**
  * @author Torgeir Lorange Ostby
  * @version $Id: Course.java 29 2007-08-23 19:39:08Z torgeilo $
  */
 public class Course
-{
+{	
     private int id;
 
     /**
@@ -21,6 +22,7 @@ public class Course
      */
     private String name;
     
+
     private Set<Student> attendants = new HashSet<Student>();
 
     // -------------------------------------------------------------------------
@@ -110,6 +112,7 @@ public class Course
         this.name = name;
     }
 
+  //  @JsonIgnore
     public Set<Student> getAttendants()
     {
         //attendants = new HashSet<Student>( attendants ); // Rehash hack

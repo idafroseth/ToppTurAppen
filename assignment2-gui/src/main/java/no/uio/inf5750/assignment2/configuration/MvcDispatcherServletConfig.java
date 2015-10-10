@@ -3,11 +3,13 @@ package no.uio.inf5750.assignment2.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
@@ -32,7 +34,13 @@ public class MvcDispatcherServletConfig extends WebMvcConfigurerAdapter{
 		resolver.setExposeContextBeansAsAttributes(true);
 		return resolver;
 	}
-	
+
+	//This bean handles REST request and it a) Determine the requested media type(s).
+	// Find the best view for the requested media type(s).
+//	@Bean
+//	public ViewResolver contentNegotiatingViewResolver(){
+//		return new ContentNegotiatingViewResolver();
+//	}
 	//asking DispatcherServlet to forward requests for static resources to the servlet container’s default servlet and not to try to handle them itself.
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
