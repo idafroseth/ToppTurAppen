@@ -57,10 +57,10 @@ public class ApiController extends WebMvcConfigurerAdapter{
 	// It should return a collection of all students in at leat the JSON format,
 	// Make sure that there i no loop when a student refer to a course and a
 	// course refer to a student by stopping the reqursion
-	@RequestMapping(value = "/student/{user}", method = RequestMethod.GET, produces="application/json")
 	// Should it be the users name or student id??
 	//When using @ResponseBody we ensure that spring does not use a view to render the response, but use
 	//The message converter that suits best (We are going to return json in this execerise)
+	@RequestMapping(value = "/student/{user}", method = RequestMethod.GET, produces="application/json")
 	public @ResponseBody Student getStudentByUsername(@PathVariable Integer user) {
 		Student student = studentSystem.getStudent(user);
 		return student;
@@ -73,10 +73,10 @@ public class ApiController extends WebMvcConfigurerAdapter{
 	}
 
 	@RequestMapping(value = "student/{student}/location", method = RequestMethod.GET, produces="application/json")
-	public String getLocation(@PathVariable String student, @RequestParam("latitude") String latitude,
+	public @ResponseBody Collection<Student> getLocation(@PathVariable int studentId, @RequestParam("latitude") String latitude,
 			@RequestParam("longitude") String longitude) {
-		Student user = studentSystem.getStudentByName(student);
-		return user.getLatitude();
+		studentSystem.setStudentLocation(studentId, latitude, longitude);
+		return studentSystem.getAllStudents();
 	}
 
 	@RequestMapping(value = "/course", method = RequestMethod.GET, produces="application/json")

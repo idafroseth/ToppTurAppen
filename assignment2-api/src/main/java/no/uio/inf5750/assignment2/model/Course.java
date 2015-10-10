@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 //import com.fasterxml.jackson.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * @author Torgeir Lorange Ostby
  * @version $Id: Course.java 29 2007-08-23 19:39:08Z torgeilo $
@@ -112,7 +116,6 @@ public class Course
         this.name = name;
     }
 
-  //  @JsonIgnore
     public Set<Student> getAttendants()
     {
         //attendants = new HashSet<Student>( attendants ); // Rehash hack

@@ -2,10 +2,15 @@ package no.uio.inf5750.assignment2.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 /**
  * @author Torgeir Lorange Ostby
  * @version $Id: Student.java 29 2007-08-23 19:39:08Z torgeilo $
  */
+//Added this so we do not get a infinit json recursion
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Student
 {
     private int id;

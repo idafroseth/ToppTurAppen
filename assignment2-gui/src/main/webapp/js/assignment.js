@@ -1,26 +1,3 @@
-let map;
-function initialize_map(){
-	//Define teh map options as a object
-	let mapOptions = {
-			zoom : 10,
-			mapTypeId : google.maps.MapTypeId.ROADMAP
-	};
-	map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    // Try HTML5 geolocation
-    if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                    var pos = new google.maps.LatLng(position.coords.latitude,
-                                    position.coords.longitude);
-                    map.setCenter(pos);
-            }, function() {
-                    handleNoGeolocation(true);
-            });
-    } else {
-            // Browser doesn't support Geolocation
-            // Should really tell the user…
-    }
-}
-
 function getStudentData() {
 
 	// This must be implemented by you. The json variable should be fetched
@@ -28,7 +5,14 @@ function getStudentData() {
 	// You must first download the student json data from the server
 	// then call populateStudentTable(json);
 	// and then populateStudentLocationForm(json);
-	var json =
+
+	var json = 
+//		$.getJSON("http://localhost:8080/api/student.js", function(result){
+//			$each(result, function(i, field){
+//				$("div").append(field + "");
+//			});
+//		});
+	
 			[ { "courses" : [ { "courseCode" : "FAKE5750",
 		          "id" : 1,
 		          "name" : "Fake data"
@@ -40,8 +24,8 @@ function getStudentData() {
 		      ],
 		    "degrees" : [  ],
 		    "id" : 1,
-		    "latitude" : null,
-		    "longitude" : null,
+		    "latitude" : 60.7957400,
+		    "longitude" : 10.6915500,
 		    "name" : "John McFake"
 		  },
 		  { "courses" : [ { "courseCode" : "FAKE5750",
@@ -55,8 +39,8 @@ function getStudentData() {
 		      ],
 		    "degrees" : [  ],
 		    "id" : 2,
-		    "latitude" : null,
-		    "longitude" : null,
+		    "latitude" : 30,
+		    "longitude" : 50,
 		    "name" : "Jane Faka"
 		  }
 		];
@@ -108,6 +92,7 @@ function populateStudentTable(json) {
 			 * src="/assignment2-gui/images/Button-Delete-icon.png"></a>';
 			 */
 		}
+
 		tableString += '</td>';
 
 		// Location
@@ -117,16 +102,17 @@ function populateStudentTable(json) {
 		} else {
 			tableString += '<td>No location</td>';
 		}
+		var myLatlng = new google.maps.LatLng(student.latitude, student.longitude);                        
+		var marker = new google.maps.Marker({
+		    position: myLatlng,
+		    map: map,
+		    title: student.name
+		});
 
 		tableString += '</tr>';
 		$('#studentTable').append(tableString);
+		
 	}
-	var myLatlng = new google.maps.LatLng(student.latitude, student.longitude);                        
-	var marker = new google.maps.Marker({
-	    position: myLatlng,
-	    map: map,
-	    title: student.name
-	});
 
 }
 
@@ -151,6 +137,7 @@ $('#locationbtn').on('click', function(e) {
 
 
 var objectStorage = new Object();
+
 function explodeJSON(object) {
 	if (object instanceof Object == true) {
 		objectStorage[object['@id']] = object;
@@ -162,4 +149,26 @@ function explodeJSON(object) {
 	}
 	console.log(object);
 	return object;
+}
+
+var map;
+function initialize_map() {
+        var mapOptions = {
+                zoom : 10,
+                mapTypeId : google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        // Try HTML5 geolocation
+        if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                        var pos = new google.maps.LatLng(position.coords.latitude,
+                                        position.coords.longitude);
+                        map.setCenter(pos);
+                }, function() {
+                        handleNoGeolocation(true);
+                });
+        } else {
+                // Browser doesn't support Geolocation
+                // Should really tell the user…
+        }
 }
