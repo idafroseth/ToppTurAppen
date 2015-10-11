@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  * @version $Id: Student.java 29 2007-08-23 19:39:08Z torgeilo $
  */
 //Added this so we do not get a infinit json recursion
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Student
 {
     private int id;

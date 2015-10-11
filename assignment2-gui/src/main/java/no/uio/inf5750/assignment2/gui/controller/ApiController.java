@@ -68,14 +68,15 @@ public class ApiController extends WebMvcConfigurerAdapter{
 
 	@RequestMapping(value = "/student", method = RequestMethod.GET, produces="application/json")
 	public	@ResponseBody Collection<Student> getAllStudents() {
+		System.out.println("******************GETTING ALL THE STUDENTS*********");
 		Collection<Student> students = studentSystem.getAllStudents();
 		return students;
 	}
 
-	@RequestMapping(value = "student/{student}/location", method = RequestMethod.GET, produces="application/json")
-	public @ResponseBody Collection<Student> getLocation(@PathVariable int studentId, @RequestParam("latitude") String latitude,
-			@RequestParam("longitude") String longitude) {
-		studentSystem.setStudentLocation(studentId, latitude, longitude);
+	@RequestMapping(value = "/student/{student}/location", method = RequestMethod.GET, produces="application/json")
+	public @ResponseBody Collection<Student> getLocation(@PathVariable String studentId, @RequestParam(value = "latitude") String latitude,
+			@RequestParam(value = "longitude") String longitude) {
+		studentSystem.setStudentLocation(Integer.parseInt(studentId), latitude, longitude);
 		return studentSystem.getAllStudents();
 	}
 

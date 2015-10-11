@@ -26,7 +26,7 @@ public class Course
      */
     private String name;
     
-
+    @JsonIgnore
     private Set<Student> attendants = new HashSet<Student>();
 
     // -------------------------------------------------------------------------
@@ -115,14 +115,15 @@ public class Course
     {
         this.name = name;
     }
-
+    
+    @JsonIgnore
     public Set<Student> getAttendants()
     {
         //attendants = new HashSet<Student>( attendants ); // Rehash hack
 
         return attendants;
     }
-
+    
     public void setAttendants( Set<Student> attendants )
     {
         this.attendants = attendants;

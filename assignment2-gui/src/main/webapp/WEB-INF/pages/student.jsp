@@ -15,10 +15,10 @@
 	rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<[if lt IE 9]>
+	<!-- <[if lt IE 9]>
       <script src="${pageContext.request.contextPath}/js/html5shiv.js"></script>
       <script src="${pageContext.request.contextPath}/js/respond.min.js"></script>
-    <![endif]>
+    <![endif]-->
 
 </head>
 <body>

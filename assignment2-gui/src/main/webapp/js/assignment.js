@@ -1,57 +1,84 @@
 function getStudentData() {
-
+	
 	// This must be implemented by you. The json variable should be fetched
 	// from the server, not initiated with a static value as below. 
 	// You must first download the student json data from the server
 	// then call populateStudentTable(json);
 	// and then populateStudentLocationForm(json);
-
-	var json = 
-//		$.getJSON("http://localhost:8080/api/student.js", function(result){
-//			$each(result, function(i, field){
-//				$("div").append(field + "");
-//			});
-//		});
+	var studentJsonURL = "/assignment2-gui/api/student.json";
 	
-			[ { "courses" : [ { "courseCode" : "FAKE5750",
-		          "id" : 1,
-		          "name" : "Fake data"
-		        },
-		        { "courseCode" : "INF5761",
-		          "id" : 2,
-		          "name" : "Fake data"
-		        }
-		      ],
-		    "degrees" : [  ],
-		    "id" : 1,
-		    "latitude" : 60.7957400,
-		    "longitude" : 10.6915500,
-		    "name" : "John McFake"
-		  },
-		  { "courses" : [ { "courseCode" : "FAKE5750",
-		          "id" : 1,
-		          "name" : "Fake data"
-		        },
-		        { "courseCode" : "INF5761",
-		          "id" : 2,
-		          "name" : "Fake data"
-		        }
-		      ],
-		    "degrees" : [  ],
-		    "id" : 2,
-		    "latitude" : 30,
-		    "longitude" : 50,
-		    "name" : "Jane Faka"
-		  }
-		];
-	populateStudentTable(json);
-	populateStudentLocationForm(json);
+	//I guess this look pretty ugly, but I was not able to shave the variable in any way?? 
+	//When I tried to save it as a variable the data was like a strange object...
+	//When reading about it it seems like the getJson expect and that is what the populateStudentTable do
+	$.getJSON(studentJsonURL, function(json){
+		populateStudentTable(json);
+		populateStudentLocationForm(json);
+	});
+//var json = 	
+//			[ { "courses" : [ { "courseCode" : "FAKE5750",
+//		          "id" : 1,
+//		          "name" : "Fake data"
+//		        },
+//		        { "courseCode" : "INF5761",
+//		          "id" : 2,
+//		          "name" : "Fake data"
+//		        }
+//		      ],
+//		    "degrees" : [  ],
+//		    "id" : 1,
+//		    "latitude" : 60.7957400,
+//		    "longitude" : 10.6915500,
+//		    "name" : "John McFake"
+//		  },
+//		  { "courses" : [ { "courseCode" : "FAKE5750",
+//		          "id" : 1,
+//		          "name" : "Fake data"
+//		        },
+//		        { "courseCode" : "INF5761",
+//		          "id" : 2,
+//		          "name" : "Fake data"
+//		        }
+//		      ],
+//		    "degrees" : [  ],
+//		    "id" : 2,
+//		    "latitude" : 30,
+//		    "longitude" : 50,
+//		    "name" : "Jane Faka"
+//		  }
+//		];
+
+
 }
 
 // This function gets called when you press the Set Location button
 function get_location() {
 	if (Modernizr.geolocation) {
-		// Find location... fill in. 
+		var studentId = document.getElementById("selectedStudent").value;
+		var setLocationUrl = "/assignment2-gui/api/student/2/location";
+		
+			$.ajax({
+		    url: setLocationUrl,
+		    data: { 
+		        "latitude": 20, 
+		        "longitude": 50
+		    },
+		    dataType: "json",
+		 //   cache: false,
+		    type: "GET",
+		    success: function(response) {
+
+		    },
+		    error: function(xhr) {
+
+		    }
+		});
+
+		console.log("*****URL ID:");
+		
+		console.log(setLocationUrl);
+		
+		
+	//	navigator.geolocation.getCurrentPosition(initialize_map);
 	} else {
 		// no native support; maybe try a fallback?
 	}
@@ -102,12 +129,6 @@ function populateStudentTable(json) {
 		} else {
 			tableString += '<td>No location</td>';
 		}
-		var myLatlng = new google.maps.LatLng(student.latitude, student.longitude);                        
-		var marker = new google.maps.Marker({
-		    position: myLatlng,
-		    map: map,
-		    title: student.name
-		});
 
 		tableString += '</tr>';
 		$('#studentTable').append(tableString);
