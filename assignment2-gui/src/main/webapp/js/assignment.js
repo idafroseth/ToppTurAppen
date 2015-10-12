@@ -53,54 +53,83 @@ function getStudentData() {
 // This function gets called when you press the Set Location button
 function get_location() {
 	if (Modernizr.geolocation) {
-		var studentId = document.getElementById("selectedStudent").value;
-		var setLocationUrl = "/assignment2-gui/api/student/2/location";
-		
-			$.ajax({
-		    url: setLocationUrl,
-		    data: { 
-		        "latitude": 20, 
-		        "longitude": 50
-		    },
-		    dataType: "json",
-		 //   cache: false,
-		    type: "GET",
-		    success: function(response) {
-
-		    },
-		    error: function(xhr) {
-
-		    }
-		});
-
-		console.log("*****URL ID:");
-		
-		console.log(setLocationUrl);
-		
-		
-	//	navigator.geolocation.getCurrentPosition(initialize_map);
+		console.log("Geoloc is supported1");
+		navigator.geolocation.getCurrentPosition(location_found);
 	} else {
+		console.log("Geoloc is NOT supported");
 		// no native support; maybe try a fallback?
 	}
 }
+//function geoSucess(position){
+//	
 
 // Call this function when you've succesfully obtained the location. 
 function location_found(position) {
 	// Extract latitude and longitude and save on the server using an AJAX call. 
 	// When you've updated the location, call populateStudentTable(json); again
 	// to put the new location next to the student on the page. . 
+	console.log("The callback function setting the long and lat");
+	var latitude = position.coords.latitude;
+	var longitude = position.coords.longitude;
+	console.log("Longitude is: "+ longitude);
+	var studentId = document.getElementById("selectedStudent").value;
+	var setLocationUrl = "/assignment2-gui/api/student/"+ studentId +"/location";
+	
+	$.ajax({
+	    url: setLocationUrl,
+	    data: { 
+	        "latitude": latitude, 
+	        "longitude": longitude
+	    },
+	    dataType: "json",
+	    cache: true,
+	    type: "GET",
+	    success: function(response) {
+
+	    },
+	    error: function(xhr) {
+
+	    }
+	});
+ 
+	console.log("Longitude after run is " + longitude);
+	var studentJsonURL = "/assignment2-gui/api/student.json";
+	$.getJSON(studentJsonURL, function(json){
+		populateStudentTable(json);
+	});
 }
 
 
 // No need to change javascript below this line, unless you want to...
+var map;
+function initialize_map() {
+        var mapOptions = {
+                zoom : 10,
+                mapTypeId : google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        // Try HTML5 geolocation
+        if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                        var pos = new google.maps.LatLng(position.coords.latitude,
+                                        position.coords.longitude);
+                        map.setCenter(pos);
+                }, function() {
+                        handleNoGeolocation(true);
+                });
+        } else {
+                // Browser doesn't support Geolocation
+                // Should really tell the user…
+        }
+}
 
 function populateStudentTable(json) {
-
 	$('#studentTable').empty();
 
 	for (var s = 0; s < json.length; s++) {
 		var student = json[s];
 		student = explodeJSON(student);
+	
 		var tableString = "<tr>";
 		console.log('Student');
 		console.log(student);
@@ -132,6 +161,14 @@ function populateStudentTable(json) {
 
 		tableString += '</tr>';
 		$('#studentTable').append(tableString);
+		
+		var myLatlng = new google.maps.LatLng(student.latitude, student.longitude);                        
+		var marker = new google.maps.Marker({
+		    position: myLatlng,
+		    map: map,
+		    title: student.name
+		});
+
 		
 	}
 
@@ -172,24 +209,4 @@ function explodeJSON(object) {
 	return object;
 }
 
-var map;
-function initialize_map() {
-        var mapOptions = {
-                zoom : 10,
-                mapTypeId : google.maps.MapTypeId.ROADMAP
-        };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        // Try HTML5 geolocation
-        if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                        var pos = new google.maps.LatLng(position.coords.latitude,
-                                        position.coords.longitude);
-                        map.setCenter(pos);
-                }, function() {
-                        handleNoGeolocation(true);
-                });
-        } else {
-                // Browser doesn't support Geolocation
-                // Should really tell the user…
-        }
-}
+
