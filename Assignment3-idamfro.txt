@@ -1,0 +1,2 @@
+  Fetch URL: gitolite@git.uio.no:inf5750/idamfro/assignment3
+  Push  URL: gitolite@git.uio.no:inf5750/idamfro/assignment3
